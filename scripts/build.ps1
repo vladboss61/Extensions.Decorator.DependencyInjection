@@ -16,7 +16,7 @@ try
 catch
 {
     Write-Host "`e[31m❌ Error:`e[0m Something went wrong!"
-    exit 1
+    exit $LASTEXITCODE
 }
 finally
 {
