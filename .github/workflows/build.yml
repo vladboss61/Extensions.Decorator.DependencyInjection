@@ -87,3 +87,12 @@ jobs:
         with:
           name: build-results
           path: ./ci
+
+      - name: Pwd after Downloading Artifacts
+        if: success()
+        shell: pwsh
+        run: |
+          Write-Host "Current directory after downloading artifacts:" -ForegroundColor Green
+          pwd
+          Write-Host "Files in directory:" -ForegroundColor Green
+          ls -lah
