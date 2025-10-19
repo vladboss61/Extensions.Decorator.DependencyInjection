@@ -1,7 +1,11 @@
 name: "Build"
 
-on: 
+on:
   push:
+    branches:
+      - main
+
+  pull_request:
     branches:
       - main
 
@@ -43,7 +47,10 @@ jobs:
         shell: pwsh
         run: |
           Write-Host "Starting build process." -ForegroundColor Green
+          Write-Host "Building on ${{ github.ref_name }}"
+
           pwsh ./scripts/build.ps1
+
           Write-Host "Build process completed." -ForegroundColor Green
 
       - name: Pwd after Build
