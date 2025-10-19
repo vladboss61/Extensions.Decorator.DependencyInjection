@@ -28,3 +28,10 @@ jobs:
           echo "Current directory after checkout:"
           pwd
           ls -lah
+
+      - name: Build dotnet project
+        shell: pwsh
+        run: |
+          Write-Host "Starting build process." -ForegroundColor Green
+          pwsh ./scripts/build.ps1
+          Write-Host "Build process completed." -ForegroundColor Green
