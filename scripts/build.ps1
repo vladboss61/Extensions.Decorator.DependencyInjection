@@ -9,7 +9,6 @@ try
     dotnet build "$ProjectNameDir.slnx" --configuration Release
     Write-Host "`e[32m✅ Success:`e[0m Build completed successfully!"
 
-
     Write-Host "`e[32m🚀 Publishing:`e[0m Publishing project to CI Binaries folder..."
     dotnet publish "$ProjectNameDir.slnx" --configuration Release --no-build --output "$PSScriptRoot/../ci/Binaries/${ProjectNameDir}"
 }
