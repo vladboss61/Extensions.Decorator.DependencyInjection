@@ -47,6 +47,7 @@ jobs:
           Write-Host "Build process completed." -ForegroundColor Green
 
       - name: Pwd after Build
+        if: success()
         shell: pwsh
         run: |
           Write-Host "Current directory after build:" -ForegroundColor Green
@@ -55,6 +56,7 @@ jobs:
           ls -lah
 
       - name: Upload zipped results
+        if: success()
         uses: actions/upload-artifact@v4
         with:
           name: build-results
