@@ -11,7 +11,7 @@ try
 
 
     Write-Host "`e[32m🚀 Publishing:`e[0m Publishing project to CI Binaries folder..."
-    dotnet publish --configuration Release --runtime linux-x64 --no-build --output "$PSScriptRoot/../ci/Binaries/${ProjectNameDir}"
+    dotnet publish --configuration Release --no-build --output "$PSScriptRoot/../ci/Binaries/${ProjectNameDir}"
 }
 catch
 {
