@@ -55,9 +55,9 @@ jobs:
           Write-Host "Files in directory:" -ForegroundColor Green
           ls -lah
 
-      - name: Upload zipped results
+      - name: Upload build artifacts.
         if: success()
         uses: actions/upload-artifact@v4
         with:
           name: build-results
-          path: ./ci/
+          path: ./ci
