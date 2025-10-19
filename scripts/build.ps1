@@ -7,7 +7,7 @@ Push-Location $ProjectNameDir
 
 try
 {
-    Write-Host "Location: $(Get-Location)"
+    Write-Host "Location: $(ls)"
 
     dotnet restore "$ProjectNameDir.sln"
     dotnet build "$ProjectNameDir.sln" --configuration Release
