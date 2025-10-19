@@ -11,5 +11,5 @@ jobs:
     steps:
       - uses: ./.github/actions/build-action
         with:
-          dotnet_version: "8.0.x"
-          upload_artifacts_path: "ci"
+          dotnet_version: 8.0.x
+          upload_artifacts_path: ./ci
