@@ -62,9 +62,22 @@ jobs:
           Write-Host "Files in directory:" -ForegroundColor Green
           ls -lah
 
-      - name: Upload build artifacts.
+  artifacts:
+    runs-on: ubuntu-latest
+    needs: build
+
+    steps:
+      - name: Pwd before Downloading Artifacts
         if: success()
-        uses: actions/upload-artifact@v4
+        shell: pwsh
+        run: |
+          Write-Host "Current directory before downloading artifacts:" -ForegroundColor Green
+          pwd
+          Write-Host "Files in directory:" -ForegroundColor Green
+          ls -lah
+
+      - name: Download build artifacts.
+        uses: actions/download-artifact@v4
         with:
           name: build-results
           path: ./ci
