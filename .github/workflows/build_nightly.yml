@@ -2,7 +2,7 @@ name: "⚙️🌙 Build Nightly"
 
 on:
   schedule:
-    - cron: '*/5 * * * *'  # Every 5 minutes
+    - cron: '0 */3 * * *'  # Every 3 hours
 
   workflow_dispatch:
 
