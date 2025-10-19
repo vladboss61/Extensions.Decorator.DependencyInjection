@@ -45,3 +45,11 @@ jobs:
           Write-Host "Starting build process." -ForegroundColor Green
           pwsh ./scripts/build.ps1
           Write-Host "Build process completed." -ForegroundColor Green
+
+      - name: Pwd after Build
+        shell: pwsh
+        run: |
+          Write-Host "Current directory after build:" -ForegroundColor Green
+          Write-Host "$(pwd)" -ForegroundColor Green
+          Write-Host "Files in directory:" -ForegroundColor Green
+          Write-Host "$(ls -lah)" -ForegroundColor Green
