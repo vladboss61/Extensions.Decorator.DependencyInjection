@@ -6,6 +6,11 @@ on:
       - main
 
   workflow_dispatch:
+    inputs:
+      dotnet_version:
+        description: 'The version of .NET to use'
+        required: false
+        default: '8.0.x' # Latest dotnet version.
 
 jobs:
   build:
@@ -32,7 +37,7 @@ jobs:
       - name: Setup .NET 8
         uses: actions/setup-dotnet@v4
         with:
-          dotnet-version: '8.0.x' # Latest dotnet version.
+          dotnet-version: ${{ github.event.inputs.dotnet_version }}
 
       - name: Build dotnet project
         shell: pwsh

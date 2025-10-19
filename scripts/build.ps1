@@ -1,8 +1,6 @@
 $ProjectNameDir = Split-Path (Split-Path $PSScriptRoot -Parent) -Leaf
 
-Write-Output "::group::🧱 Building project"
-
-Write-Host "Building project name: $ProjectNameDir"
+Write-Output "::group::🧱 Building project $ProjectNameDir"
 Push-Location $ProjectNameDir
 
 try
