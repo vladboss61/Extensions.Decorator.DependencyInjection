@@ -1,0 +1,56 @@
+name: "Build Action"
+description: "Build project using .NET"
+inputs:
+  dotnet_version:
+    description: "The .NET version to use"
+    required: false
+    default: "8.0.x"
+
+  upload_artifacts_path:
+    description: "Path to the artifacts to upload"
+    required: false
+    default: "ci"
+
+runs:
+  using: "composite"
+  steps:
+      - name: Checkout repository
+        uses: actions/checkout@v5
+        with:
+          fetch-depth: 1
+
+      - name: Pwd after Checkout
+        run: |
+          echo "Current directory after checkout:"
+          pwd
+          ls -lah
+
+      - name: Setup .NET 8
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: ${{ inputs.dotnet_version }}
+
+      - name: Build dotnet project
+        shell: pwsh
+        run: |
+          Write-Host "Starting build process." -ForegroundColor Green
+          Write-Host "Building on ${{ github.ref_name }}"
+
+          pwsh ./scripts/build.ps1
+
+          Write-Host "Build process completed." -ForegroundColor Green
+
+      - name: Pwd after Build
+        if: success()
+        shell: pwsh
+        run: |
+          Write-Host "Current directory after build:" -ForegroundColor Green
+          pwd
+          Write-Host "Files in directory:" -ForegroundColor Green
+          ls -lah
+
+      - name: Upload build artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: build-results
+          path: ./{{ inputs.upload_artifacts_path }}

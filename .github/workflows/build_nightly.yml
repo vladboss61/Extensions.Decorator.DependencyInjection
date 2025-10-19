@@ -1,0 +1,16 @@
+name: Build Nightly
+
+on:
+  schedule:
+    - cron: '*/5 * * * *'  # Every 5 minutes
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: ./.github/actions/build-action
+        with:
+          executable: "Executable_Build_Nightly"
+          dotnet_version: "8.0.x"
+          upload_artifacts_path: "ci"

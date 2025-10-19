@@ -21,52 +21,11 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Pwd before Checkout
-        run: |
-          echo "Current directory before checkout:"
-          pwd
-          ls -lah
-
-      - name: Checkout repository
-        uses: actions/checkout@v5
+      - uses: ./.github/actions/build-action
         with:
-          fetch-depth: 1
-
-      - name: Pwd after Checkout
-        run: |
-          echo "Current directory after checkout:"
-          pwd
-          ls -lah
-
-      - name: Setup .NET 8
-        uses: actions/setup-dotnet@v4
-        with:
-          dotnet-version: ${{ github.event.inputs.dotnet_version }}
-
-      - name: Build dotnet project
-        shell: pwsh
-        run: |
-          Write-Host "Starting build process." -ForegroundColor Green
-          Write-Host "Building on ${{ github.ref_name }}"
-
-          pwsh ./scripts/build.ps1
-
-          Write-Host "Build process completed." -ForegroundColor Green
-
-      - name: Pwd after Build
-        if: success()
-        shell: pwsh
-        run: |
-          Write-Host "Current directory after build:" -ForegroundColor Green
-          pwd
-          Write-Host "Files in directory:" -ForegroundColor Green
-          ls -lah
-
-      - name: Upload build artifacts
-        uses: actions/upload-artifact@v4
-        with:
-          name: build-results
-          path: ./ci
+          executable: "Executable_Build"
+          dotnet_version: "8.0.x"
+          upload_artifacts_path: "ci"
 
   artifacts:
     runs-on: ubuntu-latest
@@ -87,3 +46,12 @@ jobs:
         with:
           name: build-results
           path: ./ci
+
+      - name: Pwd after Downloading Artifacts
+        if: success()
+        shell: pwsh
+        run: |
+          Write-Host "Current directory after downloading artifacts:" -ForegroundColor Green
+          pwd
+          Write-Host "Files in directory:" -ForegroundColor Green
+          ls -lah
