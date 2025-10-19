@@ -1,5 +1,6 @@
 name: "Build Action"
 description: "Build project using .NET"
+
 inputs:
   dotnet_version:
     description: "The .NET version to use"
@@ -20,6 +21,7 @@ runs:
           fetch-depth: 1
 
       - name: Pwd after Checkout
+        shell: bash
         run: |
           echo "Current directory after checkout:"
           pwd
