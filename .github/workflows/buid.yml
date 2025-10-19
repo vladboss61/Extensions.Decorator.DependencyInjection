@@ -1,0 +1,30 @@
+name: "Build"
+
+on: 
+  push:
+    branches:
+      - main
+
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Pwd before Checkout
+        run: |
+          echo "Current directory before checkout:"
+          pwd
+          ls -lah
+
+      - name: Checkout repository
+        uses: actions/checkout@v5
+        with:
+          fetch-depth: 0
+
+      - name: Pwd after Checkout
+        run: |
+          echo "Current directory after checkout:"
+          pwd
+          ls -lah
