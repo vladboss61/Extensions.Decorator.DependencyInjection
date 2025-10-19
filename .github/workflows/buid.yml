@@ -53,3 +53,8 @@ jobs:
           Write-Host "$(pwd)" -ForegroundColor Green
           Write-Host "Files in directory:" -ForegroundColor Green
           Write-Host "$(ls -lah)" -ForegroundColor Green
+      - name: Upload zipped results
+        uses: actions/upload-artifact@v4
+        with:
+          name: build-results
+          path: ./**
