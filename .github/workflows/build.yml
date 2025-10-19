@@ -1,4 +1,4 @@
-name: "Build"
+name: "⚙️ Build"
 
 on:
   push:
@@ -16,6 +16,10 @@ on:
         required: false
         default: '8.0.x' # Latest dotnet version.
 
+env:
+  DOTNET_VERSION: 8.0.x
+  UPLOAD_ARTIFACTS_PATH: ./ci
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -28,8 +32,8 @@ jobs:
 
       - uses: ./.github/actions/build-action
         with:
-          dotnet_version: "8.0.x"
-          upload_artifacts_path: "ci"
+          dotnet_version: ${{ env.DOTNET_VERSION }}
+          upload_artifacts_path: ${{ env.UPLOAD_ARTIFACTS_PATH }}
 
   artifacts:
     runs-on: ubuntu-latest
@@ -49,7 +53,7 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           name: build-results
-          path: ./ci
+          path: ${{ env.UPLOAD_ARTIFACTS_PATH }}
 
       - name: Pwd after Downloading Artifacts
         if: success()

@@ -1,4 +1,4 @@
-name: Build Nightly
+name: "⚙️ 🌃 Build Nightly"
 
 on:
   schedule:

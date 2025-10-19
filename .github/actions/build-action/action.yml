@@ -50,4 +50,4 @@ runs:
         uses: actions/upload-artifact@v4
         with:
           name: build-results
-          path: ./{{ inputs.upload_artifacts_path }}
+          path: ${{ inputs.upload_artifacts_path }}
