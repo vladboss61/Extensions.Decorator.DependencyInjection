@@ -1,25 +1,22 @@
-$ProjectNameDir = Split-Path (Split-Path $PSScriptRoot -Parent) -Leaf
 
-Write-Output "::group::🧱 Building project $ProjectNameDir"
-Push-Location $ProjectNameDir
+$RootFolder = Get-Location;
+$ProjectName = Get-ChildItem -Path "$RootFolder/src" -File -Filter "*.slnx" | Select-Object -First 1 -ExpandProperty BaseName
+
+Write-Output "::group::🧱 Building project $ProjectName"
 
 try
 {
-    dotnet restore "$ProjectNameDir.slnx"
-    dotnet build "$ProjectNameDir.slnx" --configuration Release
+    dotnet restore "$RootFolder/src/$ProjectName.slnx"
+    dotnet build "$RootFolder/src/$ProjectName.slnx" --configuration Release
     Write-Host "`e[32m✅ Success:`e[0m Build completed successfully!"
 
     Write-Host "`e[32m🚀 Publishing:`e[0m Publishing project to CI Binaries folder..."
-    dotnet publish "$ProjectNameDir.slnx" --configuration Release --no-build --output "$PSScriptRoot/../ci/Binaries/${ProjectNameDir}"
+    dotnet publish "$RootFolder/src/$ProjectName.slnx" --configuration Release --no-build --output "$PSScriptRoot/../ci/Binaries/${ProjectName}"
 }
 catch
 {
     Write-Host "`e[31m❌ Error:`e[0m Something went wrong!"
     exit $LASTEXITCODE
-}
-finally
-{
-    Pop-Location
 }
 
 Write-Output "::endgroup::"

@@ -4,6 +4,9 @@ on:
   schedule:
     - cron: "0 */3 * * *"  # Every 3 hours
 
+env:
+  DOTNET_VERSION: 8.0.x
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -16,5 +19,5 @@ jobs:
 
       - uses: ./.github/actions/build-action
         with:
-          dotnet_version: 8.0.x
+          dotnet_version: ${{ env.DOTNET_VERSION }}
           upload_artifacts_path: ./ci

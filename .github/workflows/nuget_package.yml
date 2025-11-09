@@ -1,0 +1,32 @@
+name: "📦 NuGet Package"
+
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: 'NuGet Package Version'
+        required: true
+
+env:
+  DOTNET_VERSION: 8.0.x
+  NUGET_API_KEY: ${{ secrets.API_KEY }}
+
+jobs:
+  nuget_package:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v5
+        with:
+          fetch-depth: 1
+
+      - name: Setup .NET 8
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: ${{ inputs.dotnet_version }}
+
+      - name: Pack Nuget Package
+        shell: pwsh
+        run: |
+          pwsh ./scripts/pack.ps1 -Version ${{ inputs.version }} -ApiKey ${{ env.NUGET_API_KEY }}
