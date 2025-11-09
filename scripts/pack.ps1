@@ -28,4 +28,3 @@ catch
     Write-Host "`e[31m❌ Error:`e[0m Something went wrong!"
     exit $LASTEXITCODE
 }
-Write-Output "::endgroup::"
