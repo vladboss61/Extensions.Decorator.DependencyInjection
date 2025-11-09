@@ -9,7 +9,6 @@ on:
 
 env:
   DOTNET_VERSION: 8.0.x
-  NUGET_API_KEY: ${{ secrets.API_KEY }}
 
 jobs:
   nuget_package:
@@ -29,4 +28,4 @@ jobs:
       - name: Pack Nuget Package
         shell: pwsh
         run: |
-          pwsh ./scripts/pack.ps1 -Version ${{ inputs.version }} -ApiKey ${{ env.NUGET_API_KEY }}
+          pwsh ./scripts/pack.ps1 -Version ${{ inputs.version }} -ApiKey ${{ secrets.API_KEY }}
