@@ -5,6 +5,7 @@ param(
 
 $RootFolder = Get-Location;
 $ProjectName = Get-ChildItem -Path "$RootFolder/src" -File -Filter "*.slnx" | Select-Object -First 1 -ExpandProperty BaseName
+$BinariesOutputFolder = "$RootFolder/ci/Binaries/$ProjectName"
 
 Write-Output "::group::🧱 Building project $ProjectName"
 
@@ -17,7 +18,7 @@ try
     Write-Host "`e[32m🚀 Publishing:`e[0m Publishing project to CI Binaries folder..."
     dotnet publish "$RootFolder/src/$ProjectName/$ProjectName.csproj" `
         --configuration $Configuration --no-build `
-        --output "$RootFolder/ci/Binaries/$ProjectName"
+        --output $BinariesOutputFolder
 }
 catch
 {

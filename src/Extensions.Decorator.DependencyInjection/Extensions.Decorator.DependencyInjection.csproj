@@ -3,6 +3,8 @@
   <PropertyGroup>
     <OutputType>Exe</OutputType>
     <TargetFramework>net8.0</TargetFramework>
+		<RepositoryUrl>https://github.com/vladboss61/Extensions.Decorator.DependencyInjection</RepositoryUrl>
+		<Authors>Varvashenko Vlad</Authors>
   </PropertyGroup>
 
   <ItemGroup>
