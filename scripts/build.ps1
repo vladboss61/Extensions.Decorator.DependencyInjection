@@ -6,12 +6,12 @@ Write-Output "::group::🧱 Building project $ProjectName"
 
 try
 {
-    dotnet restore "$RootFolder/src/$ProjectName.slnx"
-    dotnet build "$RootFolder/src/$ProjectName.slnx" --configuration Release
+    dotnet restore "$RootFolder/src/$ProjectName/$ProjectName.csproj"
+    dotnet build "$RootFolder/src/$ProjectName/$ProjectName.csproj" --configuration Release
     Write-Host "`e[32m✅ Success:`e[0m Build completed successfully!"
 
     Write-Host "`e[32m🚀 Publishing:`e[0m Publishing project to CI Binaries folder..."
-    dotnet publish "$RootFolder/src/$ProjectName.slnx" --configuration Release --no-build --output "$PSScriptRoot/../ci/Binaries/${ProjectName}"
+    dotnet publish "$RootFolder/src/$ProjectName/$ProjectName.csproj" --configuration Release --no-build --output "$PSScriptRoot/../ci/Binaries/$ProjectName"
 }
 catch
 {
